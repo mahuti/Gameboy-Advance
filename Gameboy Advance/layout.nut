@@ -117,14 +117,30 @@ local boxart = null
 if ( config["show_boxart"] == "Yes" )
 {
     // Boxart
-    boxart = fe.add_artwork("boxart", scalepos.x(700), scalepos.y(0), scalepos.width(698), scalepos.height(698))
+    boxart = fe.add_artwork("boxart", pos.x(700), pos.y(0), pos.width(698), pos.height(698))
     boxart.preserve_aspect_ratio = true
     boxart.trigger = Transition.EndNavigation
     boxart.rotation = -7.5 
     boxart.x = scalepos.x(-50,"right", boxart)
-
+    boxart.zorder = 10
     local ds = DropShadow( boxart, 40, scalepos.x(-10), scalepos.y(20), 83 )
 }
+// Gameboy Overlay
+local gb_overlay = fe.add_image("gba_foreground.png", pos.x(-250), pos.y(50), pos.width(1724), pos.height(1079))
+gb_overlay.preserve_aspect_ratio = true
+gb_overlay.x=pos.x(-350,"left",gb_overlay,null,"left")
+
+print ("\nwidth: " + fe.layout.width); 
+print ("\nheight: " + fe.layout.height); 
+print ("\ngb_overlay: " + gb_overlay.x); 
+print ("\nx scale"+ scalepos.x(gb_overlay.x));
+if (gb_overlay.x< -250)
+{
+    gb_overlay.x=scalepos.x(-220,"left",gb_overlay,null,"left")
+}
+gb_overlay.zorder=100
+//gb_overlay.alpha=70
+
 
 local wheel = null
 if ( config["show_logos"] == "Yes" )
@@ -140,13 +156,17 @@ if ( config["show_logos"] == "Yes" )
     {
         wheel.y=pos.y(10,"bottom",wheel)        
     }
+    
+    wheel.x=scalepos.x(-60,"left",wheel,gb_overlay,"right")
     wheel.preserve_aspect_ratio = true
 	wheel.trigger = Transition.EndNavigation
     wheel.alpha=220
+    wheel.zorder=30
 }
 
 local notebook = fe.add_image("stuart_hall.png", 0, scalepos.y(30), scalepos.width(1708), scalepos.height(2004))
 notebook.x = scalepos.x(-600,"left",notebook,null,"right")
+notebook.zorder= 20
     
 if (wheel != null){
     notebook.y = scalepos.y(-400,"top",notebook,wheel,"bottom")
@@ -155,7 +175,7 @@ else
 {
     notebook.y = scalepos.y(-400,"top",notebook,null,"bottom")
 }
-notebook.zorder = boxart.zorder -1 
+
 local playtime = null 
 if ( config["show_playtime"] != "No" )
 {
@@ -175,27 +195,34 @@ if ( config["show_playtime"] != "No" )
 }
     
 // Missing Cartridge Underlay
-local gb_underlay = fe.add_image("nogame.png", scalepos.x(370), scalepos.y(220), scalepos.width(615), scalepos.height(616))
+local gb_underlay = fe.add_image("nogame.png", pos.x(370), pos.y(220), pos.width(615), pos.height(616))
 gb_underlay.preserve_aspect_ratio = true
-gb_underlay.rotation = 4.4
+gb_underlay.rotation = 4.8
+gb_underlay.x=scalepos.x(70,"center",gb_underlay,gb_overlay,"center")
+gb_underlay.y=scalepos.y(-50,"center",gb_underlay,gb_overlay,"center")
+gb_underlay.zorder = 50
 
 // Snap
-local snap = fe.add_artwork("snap", scalepos.x(340), scalepos.y(320), scalepos.width(640), scalepos.height(420))
+local snap = fe.add_artwork("snap", pos.x(340), pos.y(338), pos.width(630), pos.height(420))
 snap.trigger = Transition.EndNavigation
 snap.preserve_aspect_ratio=true
-snap.rotation = 4.4
+snap.rotation = 4.8
+snap.x=scalepos.x(43,"center",snap,gb_overlay,"center")
+snap.y=scalepos.y(-45,"center",snap,gb_overlay,"center")
+
+snap.zorder=60
 
 
 if (config["show_scanlines"] == "Yes" )
 {
     // Scanlines
-    local scanlines = fe.add_image("scanlines.png", scalepos.x(370), scalepos.y(265), scalepos.width(610), scalepos.height(460) )
+    local scanlines = fe.add_image("scanlines.png", pos.x(370), pos.y(290), pos.width(655), pos.height(465) )
     scanlines.preserve_aspect_ratio = true
-    scanlines.rotation = 5.4
-    scanlines.alpha=220
+    scanlines.rotation = 5.6
+    scanlines.alpha=210
+    scanlines.x=scalepos.x(58,"center",scanlines,gb_overlay,"center")
+    scanlines.y=scalepos.y(-50,"center",scanlines,gb_overlay,"center")
+    scanlines.zorder=70
 }
 
-// Gameboy Overlay
-local gb_overlay = fe.add_image("gba_foreground.png", scalepos.x(-250), scalepos.y(50), scalepos.width(1724), scalepos.height(1079))
-gb_overlay.preserve_aspect_ratio = true
-//gb_overlay.alpha=70
+    
