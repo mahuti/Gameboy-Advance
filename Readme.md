@@ -7,17 +7,17 @@ I created several themes for handhelds living in their natural environments. On 
 ![Image of GBA Theme Sample](https://raw.githubusercontent.com/mahuti/Gameboy-Advance/master/gba.png)
 
 ### Requires: 
-- Snap: video snaps from emumovies
-- Flyer: 2d boxart from hyperspin
-- Wheel: wheel logos from hyperspin
+- Pos module https://github.com/mahuti/Pos-Module
+- shadow-glo module (included) by Zpaolo11x
+
+### uses: 
+- snap: video snaps 
+- boxart: 2d boxart 
+- wheel: wheel logos 
 
 ### Features: 
-- 2d boxart is optional
-- Themes are 4:3 ratio
+- Standard images are angled dynamically
+- Theme is scalable to any size 
 - Does not use a spinning wheel (but does use wheel logos)
-- Gameboy is based on a Gameboy with an Afterburner front light mod (hence the light bleed)
-
-
-#### To-Do
-- [ ] Modify Theme to work in other than 4:3 Mode
+- Gameboy is based on a Gameboy with an Afterburner front light mod (hence the slight front light bleed)
 
